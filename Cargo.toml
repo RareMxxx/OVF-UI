@@ -1,0 +1,69 @@
+[package]
+name = "ovf-dock"
+version = "0.5.0"
+edition = "2024"
+description = "Native VMware Cloud Director transfer desk powered by OVF Tool"
+license = "MIT"
+
+[dependencies]
+anyhow = "1"
+argon2 = "0.5"
+aes-gcm = "0.10"
+base64 = "0.22"
+bytes = "1"
+chrono = { version = "0.4", features = ["serde"] }
+directories = "6"
+eframe = { version = "0.31.1", default-features = false, features = ["default_fonts", "glow", "x11", "wayland", "__screenshot"] }
+fs2 = "0.4"
+futures-util = "0.3"
+hex = "0.4"
+hmac = "0.12"
+object_store = { version = "0.12", default-features = false, features = ["aws"] }
+http-body-util = "0.1"
+hyper = { version = "1", features = ["http1", "server"] }
+hyper-util = { version = "0.1", features = ["tokio"] }
+percent-encoding = "2"
+rand = "0.8"
+rcgen = "0.13"
+regex = "1"
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls-native-roots", "json", "stream"] }
+rfd = "0.15"
+roxmltree = "0.20"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+semver = "1"
+sha1 = "0.10"
+sha2 = "0.10"
+tar = "0.4"
+tempfile = "3"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "io-util", "process", "sync", "time", "fs"] }
+tokio-rustls = { version = "0.26", default-features = false, features = ["ring", "tls12"] }
+tokio-util = { version = "0.7", features = ["io", "rt"] }
+url = "2"
+uuid = { version = "1", features = ["v4", "serde"] }
+zeroize = { version = "1", features = ["derive"] }
+unicode-normalization = "0.1"
+
+[target.'cfg(windows)'.dependencies]
+keyring = { version = "3", features = ["windows-native"] }
+windows-sys = { version = "0.59", features = ["Win32_Foundation", "Win32_System_Threading", "Win32_Security"] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+keyring = { version = "3", features = ["sync-secret-service", "crypto-rust"] }
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
+
+[features]
+test-fixtures = []
+
+[[bin]]
+name = "ovf-ui"
+path = "src/main.rs"
+
+[[bin]]
+name = "mock-ovftool"
+path = "tests/fixtures/mock_ovftool.rs"
+required-features = ["test-fixtures"]
