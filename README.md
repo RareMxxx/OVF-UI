@@ -1,6 +1,6 @@
 # OVF UI
 
-OVF UI — графический интерфейс для VMware OVF Tool. Позволяет загружать и скачивать OVA, OVF и ISO в Cloud Director без работы с командной строкой.
+OVF UI - графический интерфейс для VMware OVF Tool. Позволяет загружать и скачивать OVA, OVF и ISO в Cloud Director без работы с командной строкой.
 
 Приложение рассчитано прежде всего на **MWS Cloud Director — облако на базе VMware**. Сейчас доступна версия для Windows x64. OVF Tool нужно установить отдельно.
 
